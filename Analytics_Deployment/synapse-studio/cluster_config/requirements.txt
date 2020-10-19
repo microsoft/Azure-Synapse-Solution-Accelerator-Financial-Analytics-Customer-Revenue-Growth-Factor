@@ -1,0 +1,2 @@
+azure-storage-blob==12.4.0
+azureml-interpret==1.15.0
