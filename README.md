@@ -4,6 +4,7 @@
 ## About this repository
 This accelerator was built to provide developers with all of the resources needed to build a solution to identify the top factors for revenue growth from an e-commerce platform using Azure Synapse Analytics and Azure Machine Learning.
 
+<<<<<<< HEAD
 ## Introduction
 <video 
 style="width: 100%; height: auto"
@@ -15,6 +16,8 @@ poster="https://customergrowthmedia.blob.core.windows.net/media/CGF_Still.jpg">
 Your browser does not support the video tag.</video>
 
 **[Watch Introduction](https://customergrowthmedia.blob.core.windows.net/media/CSG_Intro.mp4)**
+=======
+>>>>>>> origin/main
 
 
 ## Prerequisites

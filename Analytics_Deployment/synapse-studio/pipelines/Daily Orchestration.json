@@ -1,0 +1,133 @@
+{
+    "name": "Daily Orchestration",
+    "properties": {
+        "activities": [
+            {
+                "name": "Clean Data",
+                "type": "SynapseNotebook",
+                "dependsOn": [],
+                "policy": {
+                    "timeout": "7.00:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "notebook": {
+                        "referenceName": "1 - Clean Data",
+                        "type": "NotebookReference"
+                    }
+                }
+            },
+            {
+                "name": "Data Engineering",
+                "type": "SynapseNotebook",
+                "dependsOn": [
+                    {
+                        "activity": "Clean Data",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "7.00:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "notebook": {
+                        "referenceName": "2 - Data Engineering",
+                        "type": "NotebookReference"
+                    }
+                }
+            },
+            {
+                "name": "Feature Engineering",
+                "type": "SynapseNotebook",
+                "dependsOn": [
+                    {
+                        "activity": "Data Engineering",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "7.00:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "notebook": {
+                        "referenceName": "3 - Feature Engineering",
+                        "type": "NotebookReference"
+                    }
+                }
+            },
+            {
+                "name": "ML Model Building",
+                "type": "SynapseNotebook",
+                "dependsOn": [
+                    {
+                        "activity": "Feature Engineering",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "7.00:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "notebook": {
+                        "referenceName": "4 - ML Model Building",
+                        "type": "NotebookReference"
+                    }
+                }
+            },
+            {
+                "name": "PBI Data Modeling",
+                "type": "SynapseNotebook",
+                "dependsOn": [
+                    {
+                        "activity": "Clean Data",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "7.00:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "notebook": {
+                        "referenceName": "6 - PBI Data Model",
+                        "type": "NotebookReference"
+                    }
+                }
+            }
+        ],
+        "annotations": [],
+        "lastPublishTime": "2020-10-05T03:37:28Z"
+    },
+    "type": "Microsoft.Synapse/workspaces/pipelines"
+}
