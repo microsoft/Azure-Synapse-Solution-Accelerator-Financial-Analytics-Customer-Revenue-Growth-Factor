@@ -12,14 +12,14 @@ We are using the data provided by [this Kaggle Open Dataset](https://www.kaggle.
     - 2020-Mar.csv.gz (available [here](https://drive.google.com/drive/folders/1Nan8X33H8xrXS5XhCKZmSpClFTCJsSpE))
     - 2020-Apr.csv.gz (available [here](https://drive.google.com/drive/folders/1Nan8X33H8xrXS5XhCKZmSpClFTCJsSpE))  
 
-## Step 2: Create Azure Synapse Analytics (workspace preview)
-In this step you will deploy an Azure Synapse Analytics (workspace preview), a Spark Pool in the Azure Synapse Analytics (workspace preview) and an Azure Data Lake (Gen2) Storage Account into your Azure Subscription that you are using for this solution accelerator. 
-1. Go to the Azure Portal and deploy an Azure Synapse Analytics (workspace preview) resource into the resource group that you are using for this Solution Accelerator.  
-    - You can search for `Azure Synapse Analytics (workspaces preview)` after clicking on `Create a resource` to get the correct resource.
+## Step 2: Create Azure Synapse Analytics
+In this step you will deploy an Azure Synapse Analytics, a Spark Pool in the Synapse workspace and an Azure Data Lake (Gen2) Storage Account into your Azure Subscription that you are using for this solution accelerator. 
+1. Go to the Azure Portal and deploy an Azure Synapse Analytics resource into the resource group that you are using for this Solution Accelerator.  
+    - You can search for `Azure Synapse Analytics` after clicking on `Create a resource` to get the correct resource.
     - Select your Azure subscription and resource group and provide a unique name for the workspace. Click on "Create new" to set up a new Data Lake Storage Gen2 account to use for this accelerator.
 
 ## Step 3: Upload Data to Synapse Workspace
-In this step you will upload the dataset to Azure Data Lake Gen2 so that it can be accessed in Synapse. File upload is available by downloading the Azure Storage Explorer application or using AzCopy.
+In this step you will upload the dataset to Azure Data Lake Gen2 so that it can be accessed in the Synapse workspace. File upload is available by downloading the Azure Storage Explorer application or using AzCopy.
 1. Open the Microsoft Azure Storage Explorer application
 2. Connect to your Azure account
 3. In the Explorer, expand your subscription and find the ADLS Gen2 Storage Account that you deployed in Step 2
@@ -37,14 +37,14 @@ In this step you will upload the dataset to Azure Data Lake Gen2 so that it can 
         - Azure Container Registry
 
 ## Step 4: Upload Notebooks to the Synapse Workspace  
-1. Launch Synapse Studio:  
+1. Launch Synapse workspace:  
     - Go to the resource page in the portal and click the "Launch Synapse Studio" button
 2. Go to "Develop", click the "+", and click Import:  
-    - In the demo's repository, go to `1. Analytics Deployment\synapse-studio\notebooks` to select all of the the Spark Notebooks  
+    - In the demo's repository, go to `Analytics_Deployment\synapse-workspace\notebooks` to select all of the the Spark Notebooks  
 3. Click Publish and confirm the assets to be published  
 4. Go to the "Manage" tab in the Studio and click on the Apache Spark pools  
 5. Click on the Spark Pool that you deployed and click "Packages", then click "Upload environment config file"  
-    - Go to `1. Analytics Deployment\synapse-studio\cluster_config` to get the requirements.txt for upload  
+    - Go to `Analytics_Deployment\synapse-workspace\cluster_config` to get the requirements.txt for upload  
 6. Ensure that you give yourself and any other user admin privilages for this accelerator by going to the `Manage` tab, then `Access control` underneath `Security` and click "+ Add"
     - ![Manage, Access Control](./imgs/manage_access_control.png)  
 7. Now click the Role dropdown and select all three roles, and search for your username and the other user's usernames to be added by using the search bar underneath the Role dropdown  
@@ -61,13 +61,13 @@ In this step you will upload the dataset to Azure Data Lake Gen2 so that it can 
     4. `4 - ML Model Building` 
 2. After all of these have been run successfully, you will have a Spark-based machine learning model and the top revenue growth factors
 
-## Step 6: Set Up Batch Scoring via Synapse Orchestration Pipeline
-1. In Synapse Studio, go to "Orchestrate", click the "+", and choose Pipeline
+## Step 6: Set Up Batch Scoring via Azure Synapse Orchestration Pipeline
+1. In Synapse workspace, go to "Orchestrate", click the "+", and choose Pipeline
 2. In the Properties window, change the pipeline name to "Daily Orchestration"
 3. Click the "{}" button at the top right corner to open the Code window
-4. Copy and paste the contents of `1. Analytics Deployment\synapse_studio\pipelines\Daily Orchestration.json`
+4. Copy and paste the contents of `Analytics_Deployment\synapse-workspace\pipelines\Daily Orchestration.json`
 5. Click OK to apply. The final pipeline should look like:
-    - ![Synapse Orchestrate Pipeline](./imgs/synapse_orchestrate_pipeline.png)
+    - ![Azure Synapse Orchestrate Pipeline](./imgs/synapse_orchestrate_pipeline.png)
 6. Add a scheduled trigger to run the pipeline on a daily basis
 7. Click Publish all
 
@@ -97,8 +97,8 @@ In this step you will upload the dataset to Azure Data Lake Gen2 so that it can 
     - Enter model name, select Azure Container Instance as the compute type, then click Deploy
 8. Once deployed, you can view the REST endpoint in the "Endpoints" tab
 
-## Step 8: Connect Power BI to Azure Machine Learning and Deploy to Synapse Analytics Workspace
-1. Launch Synapse Studio and run the following notebooks to export the results of the AutoML model and create the data model for the Power BI report:
+## Step 8: Connect Power BI to Azure Machine Learning and Deploy to the Synapse Workspace
+1. Launch Synapse workspace and run the following notebooks to export the results of the AutoML model and create the data model for the Power BI report:
     1. `5 - Azure ML Integration`  
     2. `6 - PBI Data Model` 
 2. Download [Power BI Desktop](https://www.microsoft.com/en-us/download/details.aspx?id=58494)
@@ -114,12 +114,12 @@ In this step you will upload the dataset to Azure Data Lake Gen2 so that it can 
     - ![Power BI AI Insights, Select Model](./imgs/pbi_ai_insights_select_model.png)
     - Once applied, you will see a new column with the AutoML score. Save your entity and dataflow
 5. Build report visuals in Power BI:
-    - In the demo's repository, go to `1. Analytics Deployment\synapse-studio\reports` and open [Customer_Growth_Factors_PBI.pbix](https://dev.azure.com/msdsip/SynapseGrowthFactor/_git/SynapseGrowthFactor?version=GBmaster&path=%2FAnalytics_Deployment%2Fsynapse-studio%2Freports%2FCustomer_Growth_Facters_PBI.pbix) in Power BI Desktop
+    - In the demo's repository, go to `Analytics_Deployment\synapse-workspace\reports` and open [Customer_Growth_Factors_PBI.pbix](../Analytics_Deployment/synapse-workspace/reports/Customer_Growth_Facters_PBI.pbix) in Power BI Desktop
     - Connect to the Data Lake via "Get Data > Azure > Azure Data Lake Gen2" and filtering to the relevant tables by URL. You will need a new dataset for each folder within `https://[adls_name].dfs.core.windows.net/[container_name]/reporting/`
     - Connect to the Dataflow via "Get Data > PowerBI dataflows" and selecting your dataflow
-6. Deploy your report to the Synapse Analytics workspace:
-    - Launch Synapse Studio and go to "Navigate > Linked services"
+6. Deploy your report to the Synapse workspace:
+    - Launch Synapse workspace and go to "Navigate > Linked services"
         - Click "New" and search for Power BI, then enter your Power BI workspace details
-        - Now your workspace is linked within Synapse
+        - Now your workspace is linked within Azure Synapse
     - In Power BI Desktop, click "Publish" to deploy your report, and select the same workspace
-7. Now you can view and edit your report from Synapse Studio
+7. Now you can view and edit your report from the Synapse workspace
