@@ -1,5 +1,4 @@
-<img src="https://customergrowthmedia.blob.core.windows.net/media/SynapseGrowthFactors.svg"
-alt="Customer Growth Factor Solution Accelerator"/>
+# Azure Synapse Solution Accelerator Customer Growth Factors
 
 ## About this repository
 This accelerator was built to provide developers with all of the resources needed to build a solution to identify the top factors for revenue growth from an e-commerce platform using Azure Synapse Analytics and Azure Machine Learning.
@@ -27,7 +26,7 @@ Optional
 The directions provided for this repository assume fundemental working knowledge of Azure, Azure Synapse Analytics, Azure Machine Learning Services, and Power BI.
 
 For additional training and support, please see:
- 1. [Azure Synapse Analytics (workspace preview)](https://azure.microsoft.com/en-us/services/synapse-analytics/)
+ 1. [Azure Synapse Analytics](https://azure.microsoft.com/en-us/services/synapse-analytics/)
  2. [Azure Machine Learning Services](https://azure.microsoft.com/en-us/services/machine-learning/)
  3. [Power BI](https://docs.microsoft.com/en-us/power-bi/)
 
@@ -37,8 +36,8 @@ For additional training and support, please see:
 
 The architecture diagram below details what you will be building for this Solution Accelerator:
 
-![Synapse AI Architecture](./Reference/Architecture/synapse_ai_architecture.png)
-![Synapse AI + AutoML Architecture](./Reference/Architecture/synapse_ai_automl_architecture.png)
+![Azure Synapse AI Architecture](./Reference/Architecture/synapse_ai_architecture.png)
+![Azure Synapse AI + AutoML Architecture](./Reference/Architecture/synapse_ai_automl_architecture.png)
 
 ### [Resource Deployment](./Resource_Deployment)
 The resources in this folder can be used to deploy the required resources into your Azure Subscription. You can do this in the Azure Portal
