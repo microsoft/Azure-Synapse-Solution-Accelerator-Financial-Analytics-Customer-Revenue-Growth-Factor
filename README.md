@@ -1,4 +1,4 @@
-# Azure Synapse Solution Accelerator Customer Growth Factors
+![Customer Revenue Growth Factor Solution Accelerator](./Resource_Deployment/imgs/CustomerRevenueGrowthFactor.png)
 
 ## About this repository
 This accelerator was built to provide developers with all of the resources needed to build a solution to identify the top factors for revenue growth from an e-commerce platform using Azure Synapse Analytics and Azure Machine Learning.
@@ -36,8 +36,8 @@ For additional training and support, please see:
 
 The architecture diagram below details what you will be building for this Solution Accelerator:
 
-![Azure Synapse AI Architecture](./Reference/Architecture/synapse_ai_architecture.png)
-![Azure Synapse AI + AutoML Architecture](./Reference/Architecture/synapse_ai_automl_architecture.png)
+![Azure Synapse AI Architecture](./Reference/Architecture/SynapseArchitecture.png)
+![Azure Synapse AI + AutoML Architecture](./Reference/Architecture/SynapseAutoMLArchitecture.png)
 
 ### [Resource Deployment](./Resource_Deployment)
 The resources in this folder can be used to deploy the required resources into your Azure Subscription. You can do this in the Azure Portal
