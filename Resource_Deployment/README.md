@@ -3,22 +3,32 @@
 We are currently working on an automated deployment process for this solution accelerator. Until this becomes available, here is the Manual Deployment Guide for deploying this Solution Accelerator.  
 
 ## Step 1: Get the data required for this Accelerator 
-We are using the data provided by [this Kaggle Open Dataset](https://www.kaggle.com/mkechinov/ecommerce-behavior-data-from-multi-category-store), and you will need to download the data to your local machine. You will need the following CSVs/Datasets (download them):  
-    - 2019-Oct.csv  
-    - 2019-Nov.csv  
-    - 2019-Dec.csv.gz (available [here](https://drive.google.com/drive/folders/1Nan8X33H8xrXS5XhCKZmSpClFTCJsSpE))   
-    - 2020-Jan.csv.gz (available [here](https://drive.google.com/drive/folders/1Nan8X33H8xrXS5XhCKZmSpClFTCJsSpE))
-    - 2020-Feb.csv.gz (available [here](https://drive.google.com/drive/folders/1Nan8X33H8xrXS5XhCKZmSpClFTCJsSpE))  
-    - 2020-Mar.csv.gz (available [here](https://drive.google.com/drive/folders/1Nan8X33H8xrXS5XhCKZmSpClFTCJsSpE))
-    - 2020-Apr.csv.gz (available [here](https://drive.google.com/drive/folders/1Nan8X33H8xrXS5XhCKZmSpClFTCJsSpE))  
+We are using the data provided by [this Kaggle Open Dataset](https://www.kaggle.com/mkechinov/ecommerce-behavior-data-from-multi-category-store), it is advisable to download the data to an Azure VM otherwise you will need to download the data to your local machine. You will need the following CSVs/Datasets (download them):  
+    - These files will be downloaded from Kaggle in a zipped folder. You will need to unzip them before loading to Azure Storage
+        - 2019-Oct.csv  
+        - 2019-Nov.csv  
+    - These files will be downloaded from a Google drive
+        - 2019-Dec.csv.gz (available [here](https://drive.google.com/drive/folders/1Nan8X33H8xrXS5XhCKZmSpClFTCJsSpE))   
+        - 2020-Jan.csv.gz (available [here](https://drive.google.com/drive/folders/1Nan8X33H8xrXS5XhCKZmSpClFTCJsSpE))
+        - 2020-Feb.csv.gz (available [here](https://drive.google.com/drive/folders/1Nan8X33H8xrXS5XhCKZmSpClFTCJsSpE))  
+        - 2020-Mar.csv.gz (available [here](https://drive.google.com/drive/folders/1Nan8X33H8xrXS5XhCKZmSpClFTCJsSpE))
+        - 2020-Apr.csv.gz (available [here](https://drive.google.com/drive/folders/1Nan8X33H8xrXS5XhCKZmSpClFTCJsSpE))  
 
-## Step 2: Create Azure Synapse Analytics
+Note: this step may take some time depending on your network connectivity. Consider using an Azure VM to speed up download and upload speeds. Please make sure the VM has at least 30 GB of available storage.
+
+## Step 2: Create Azure Synapse Analytics Workspace
 In this step you will deploy an Azure Synapse Analytics, a Spark Pool in the Synapse workspace and an Azure Data Lake (Gen2) Storage Account into your Azure Subscription that you are using for this solution accelerator. 
 1. Go to the Azure Portal and deploy an Azure Synapse Analytics resource into the resource group that you are using for this Solution Accelerator.  
     - You can search for `Azure Synapse Analytics` after clicking on `Create a resource` to get the correct resource.
     - Select your Azure subscription and resource group and provide a unique name for the workspace. Click on "Create new" to set up a new Data Lake Storage Gen2 account to use for this accelerator.
 
-## Step 3: Upload Data to Synapse Workspace
+## Step 3: Create Azure Synapse Analytics Spark Pool
+1. Launch Synapse workspace:  
+    - Go to the resource page in the portal and click the "Launch Synapse Studio" button 
+2. Go to "Manage", click on "Apache Spark Pools",  click the "+ New", and go through the "Create Apache Spark pool" wizard to create a new spark pool using the default settings.  
+    - ![Create Spark Pool](./imgs/synapse_sparkpool_create.png)  
+
+## Step 4: Upload Data to Synapse Workspace
 In this step you will upload the dataset to Azure Data Lake Gen2 so that it can be accessed in the Synapse workspace. File upload is available by downloading the Azure Storage Explorer application or using AzCopy.
 1. Open the Microsoft Azure Storage Explorer application
 2. Connect to your Azure account
@@ -87,7 +97,8 @@ In this step you will upload the dataset to Azure Data Lake Gen2 so that it can 
     - In Configure run, choose "Create new experiment" and enter your experiment details:
     - ![AutoML Run Configuration](./imgs/automl_create_run.png)
     - In Task type and settings, select "Classification"
-    - Click to "View additional configuration settings", change Primary metric to "AUC weighted", and Save
+    - Click to "View additional configuration settings", change Primary metric to "AUC weighted", and set the "Training job time (hours)"  to "0.25" and Save
+    - ![AutoML Additional Configurations](./imgs/automl_config_settings.png)
     - Click to "View featurization settings" and ensure that the `user_id`, `year`, and `month` columns are not included in training, and that feature types are appropriately selected
     - ![AutoML Featurization](./imgs/automl_featurization.png)
     - Click Finish to start the AutoML run
