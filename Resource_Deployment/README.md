@@ -3,14 +3,16 @@
 We are currently working on an automated deployment process for this solution accelerator. Until this becomes available, here is the Manual Deployment Guide for deploying this Solution Accelerator.  
 
 ## Step 1: Get the data required for this Accelerator 
-We are using the data provided by [this Kaggle Open Dataset](https://www.kaggle.com/mkechinov/ecommerce-behavior-data-from-multi-category-store), and you will need to download the data to your local machine. You will need the following CSVs/Datasets (download them):  
-    - 2019-Oct.csv  
-    - 2019-Nov.csv  
+We are using the data provided by [this Kaggle Open Dataset](https://www.kaggle.com/mkechinov/ecommerce-behavior-data-from-multi-category-store),we suggest to download to an Azure VM, otherwise you will need to download the data locally. You will need the following CSV/datasets (download them):  
+        - 2019-Oct.csv  
+        - 2019-Nov.csv  
+    - These files will be downloaded from a Google drive
     - 2019-Dec.csv.gz (available [here](https://drive.google.com/drive/folders/1Nan8X33H8xrXS5XhCKZmSpClFTCJsSpE))   
     - 2020-Jan.csv.gz (available [here](https://drive.google.com/drive/folders/1Nan8X33H8xrXS5XhCKZmSpClFTCJsSpE))
     - 2020-Feb.csv.gz (available [here](https://drive.google.com/drive/folders/1Nan8X33H8xrXS5XhCKZmSpClFTCJsSpE))  
     - 2020-Mar.csv.gz (available [here](https://drive.google.com/drive/folders/1Nan8X33H8xrXS5XhCKZmSpClFTCJsSpE))
     - 2020-Apr.csv.gz (available [here](https://drive.google.com/drive/folders/1Nan8X33H8xrXS5XhCKZmSpClFTCJsSpE))  
+- **Note**: this step may take some time depending on your network connectivity. Consider using an Azure VM to the download and upload of the datasets. Please make sure the VM has at least 30 GB of available storage. 
 
 ## Step 2: Create Azure Synapse Analytics
 In this step you will deploy a Resource Group, Azure Synapse Analytics and a Spark Pool in the Synapse workspace, an Azure Data Lake (Gen2) Storage Account and an Azure Machine Learning Service into the Azure Subscription that you are using for this solution accelerator.
@@ -122,7 +124,8 @@ Before you can upload any assets to the Synapse Workspace you will first need to
     - In Configure run, choose "Create new experiment" and enter your experiment details:
     - ![AutoML Run Configuration](./imgs/automl_create_run.png)
     - In Task type and settings, select "Classification"
-    - Click to "View additional configuration settings", change Primary metric to "AUC weighted", and Save
+    - Click to "View additional configuration settings", change Primary metric to "AUC weighted", and set the "Training job time (hours)" to "0.25" and Save
+        - **Note**: setting the "Training job time (hours)" to '0.25" will decrease the experiment time and may not give the best performing mode
     - Click to "View featurization settings" and ensure that the `user_id`, `year`, and `month` columns are not included in training, and that feature types are appropriately selected
     - ![AutoML Featurization](./imgs/automl_featurization.png)
     - Click Finish to start the AutoML run
