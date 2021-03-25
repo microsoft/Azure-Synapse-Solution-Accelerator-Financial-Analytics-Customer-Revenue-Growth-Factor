@@ -142,8 +142,10 @@ Before you can upload any assets to the Synapse Workspace you will first need to
 4. Enable AI Insights with Power BI:
     - In the new workspace, click on "New > Dataflow" to create a PBI Dataflow
     - Select "Add new entities" and choose Azure Data Lake Gen2 as your data source, then enter your connection URL as `https://[adls_name].dfs.core.windows.net/`
-    - Click to Transform Data and filter Folder Path to `https://[adls_name].dfs.core.windows.net/[container_name]/transformed_data/ml_data/` to connect to the dataset for ML modeling
-    - Click the two arrows next to the "Content" column to expand and combine all CSV files
+    - Click to Transform Data and filter Folder Path to `https://[adls_name].dfs.core.windows.net/[container_name]/transformed_data/ml_data_parquet/` to connect to the dataset for ML modeling
+    - Click "Remove rows" and click "Remove top rows" 
+        - enter `1` and select "OK"
+    - Click the two arrows next to the "Content" column to expand and combine all parquet files
     - Apply your AutoML model by clicking the "AI Insights" button
     - ![Power BI AI Insights](./imgs/pbi_ai_insights.png)
     - Select your deployed model and map the relevant columns
