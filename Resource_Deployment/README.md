@@ -3,7 +3,7 @@
 We are currently working on an automated deployment process for this solution accelerator. Until this becomes available, here is the Manual Deployment Guide for deploying this Solution Accelerator.  
 
 ## Step 1: Get the data required for this Accelerator 
-We are using the data provided by [this Kaggle Open Dataset](https://www.kaggle.com/mkechinov/ecommerce-behavior-data-from-multi-category-store),we suggest to download to an Azure VM, otherwise you will need to download the data locally. You will need the following CSV/datasets (download them):  
+We are using the data provided by [this Kaggle Open Dataset](https://www.kaggle.com/mkechinov/ecommerce-behavior-data-from-multi-category-store), we suggest to download to an Azure VM, otherwise you will need to download the data locally. You will need the following CSV/datasets (download them):  
         - 2019-Oct.csv  
         - 2019-Nov.csv  
     - These files will be downloaded from a Google drive
@@ -14,36 +14,7 @@ We are using the data provided by [this Kaggle Open Dataset](https://www.kaggle.
     - 2020-Apr.csv.gz (available [here](https://drive.google.com/drive/folders/1Nan8X33H8xrXS5XhCKZmSpClFTCJsSpE))  
 - **Note**: this step may take some time depending on your network connectivity. Consider using an Azure VM to the download and upload of the datasets. Please make sure the VM has at least 30 GB of available storage. 
 
-## Step 2: Create Azure Synapse Analytics
-In this step you will deploy a Resource Group, Azure Synapse Analytics and a Spark Pool in the Synapse workspace, an Azure Data Lake (Gen2) Storage Account and an Azure Machine Learning Service into the Azure Subscription that you are using for this solution accelerator.
-
-### Parameters
-Below are paramaters you will use to create the necessary resources for this solution accelerator.
-
-- **Subscription**: Azure Subscription Id
-- **Resource Group**: Name of the resource group to create
-- **Resource Name**: a globally unique name for creating the resources (must be 3-10 characters)
-- **Username**: SQL user for Synapse workspace
-- **Password**: SQL user for Synapse workspace (must be at least 8 characters)
-- **Location**: the location to deploy all the resources
-* **Note**: You will be installing the Azure CLI extension for Azure Synapse
-
-1. Open Powershell as Administrator
-2. Navigate to this folder `Resource_Deployment\`
-3. Run the following command: ./deployment_script.ps1
-4. Follow the prompts.
-
-### Step 2.1 Deploy Azure Machine Learning
-1. Once the above script finishes, go to the Azure Portal and deploy a Azure Machine Learning Services resource into the resource group that you are using for this Solution Accelerator.
-	* You can search for Machine Learning after clicking on Create a resource to get the correct resource.
-	* NOTE: Along with the service comes the following:
-	* Azure Key Vault
-	* Azure Storage
-	* Azure Application Insights
-	* Azure Container Registry
-		- Click "Create new", provide a name and click "save"
-        
-## Step 3: Storage Account Permissions
+## Step 2: Storage Account Permissions
 In order to read files from your Azure Storage Account from the Synapse workspace, you will need to grant Storage Blob Data Contributor. Follow the steps below to assign Storage Blob Data Contributor to the users.
 1. Go to the Azure Data Lake Storage Account created in Step 2
 2. Go to the Access Control (IAM)
@@ -53,7 +24,7 @@ In order to read files from your Azure Storage Account from the Synapse workspac
 
 Click "Save" at the bottom.
 
-## Step 4: Upload Data to Synapse Workspace
+## Step 3: Upload Data to Synapse Workspace
 In this step you will upload the dataset to Azure Data Lake Gen2 so that it can be accessed in the Synapse workspace. File upload is available by downloading the Azure Storage Explorer application or using AzCopy.
 1. Open the Microsoft Azure Storage Explorer application
 2. Connect to your Azure account
@@ -62,7 +33,9 @@ In this step you will upload the dataset to Azure Data Lake Gen2 so that it can 
 5. Create a folder named `raw_data`
 6. Upload the Kaggle dataset into this folder
 
-### Step 4.1: Add IP Address to 
+### OPTIONAL Step 3.1: Add IP Address to the Synapse Workspace 
+* **NOTE**: If you chose to `Allow All Firewall Rule` connections during the resource deployment, skip this step and move to Step 3.2
+
 Before you can upload any assets to the Synapse Workspace you will first need to add your IP address to the Synapse Workspace. 
 1. Go to the Azure Synaspe resource you created in Step 1.
 2. Navigate to `Firewalls` under `Security` on the left hand side of the page. 
@@ -70,7 +43,7 @@ Before you can upload any assets to the Synapse Workspace you will first need to
 ![client IP](./imgs/firewall.png)
 4. Your IP address should now be visable in the IP list. 
 
-### Step 4.2: Upload Assets
+### Step 3.2: Upload Assets
 1. Launch Synapse workspace:  
     - Go to the resource page in the portal and click the "Launch Synapse Studio" button
 2. Go to "Develop", click the "+", and click Import:  
@@ -85,18 +58,18 @@ Before you can upload any assets to the Synapse Workspace you will first need to
 ![upload requirements](./imgs/Requirements.png)
 8. Now the environment should be ready to go for the execution of the scripts  
   
-## Step 5: Running of the Notebooks and SQL Scripts  
+## Step 4: Running of the Notebooks and SQL Scripts  
 1. Configure / Fill out the Parameters and then Run the following notebooks and scripts in order:  
     - `1 - Clean Data`  
     - `2 - Data Engineering`  
     - `3 - Feature Engineering`  
 
-### Step 5.1: Train the Model
+### Step 4.1: Train the Model
 1. For Azure Synapse Analytics: configure the paramaters and run  `/Azure_Synapse/4 - ML Model Building.ipynb`
 2. For Azure Automated ML: Skip to Step 8 and then configure the paramaters and run  `/Azure_Automated_ML/5 - Azure ML Integration.ipynb`
 3. After all of these have been run successfully, you will have a Spark-based machine learning model and the top revenue growth factors
 
-## Step 6: Set Up Batch Scoring via Azure Synapse Integration Pipeline
+## Step 5: Set Up Batch Scoring via Azure Synapse Integration Pipeline
 * NOTE: this Batch Scoring Pipeline assumes you have run the `4 - ML Model Building.ipynb` notebook. 
 
 1. In Synapse workspace, go to "Integration", click the "+", and choose Pipeline
@@ -108,7 +81,7 @@ Before you can upload any assets to the Synapse Workspace you will first need to
 6. Add a scheduled trigger to run the pipeline on a daily basis
 7. Click Publish all
 
-## Step 7: Automate the Machine Learning Process with Azure Machine Learning and Deploy the Model to ACI
+## Step 6: Automate the Machine Learning Process with Azure Machine Learning and Deploy the Model to ACI
 1. Launch Azure Machine Learning Studio: 
     - Go to the resource page in the portal and click the "Launch studio" button
 2. Create a Compute cluster by going to "Compute > Compute clusters > New"
@@ -134,7 +107,7 @@ Before you can upload any assets to the Synapse Workspace you will first need to
     - Enter model name, select Azure Container Instance as the compute type, then click Deploy
 7. Once deployed, you can view the REST endpoint in the "Endpoints" tab
 
-## Step 8: Connect Power BI to Azure Machine Learning and Deploy to the Synapse Workspace
+## Step 7: Connect Power BI to Azure Machine Learning and Deploy to the Synapse Workspace
 1. Launch Synapse workspace and run the following notebooks to export the results of the AutoML model and create the data model for the Power BI report:
     1. `6 - PBI Data Model` 
 2. Download [Power BI Desktop](https://www.microsoft.com/en-us/download/details.aspx?id=58494)
