@@ -12,7 +12,13 @@ This accelerator was built to provide developers with all of the resources neede
 
 <img src="https://customergrowthmedia.blob.core.windows.net/media/CGF_Still.jpg" alt="customer growth factor video"/> </a>
 
+## Getting Started 
+Start by deploying the [resources](./Resource_Deployment/ResourceDeployment.md) needed for this solution: 
 
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmicrosoft%2FAzure-Synapse-Solution-Accelerator-Financial-Analytics-Customer-Revenue-Growth-Factor%2FResource_Deployment%2Fazuredeploy.json)
+
+1. Clone this repository and navigate to the root of the directory  
+2. Go to [Deployment guide](./Resource_Deployment/README.md) for the steps you need to take to deploy this solution 
 
 ## Prerequisites
 In order to successfully complete your solution, you will need to have access to and or provisioned the following:
@@ -30,9 +36,7 @@ For additional training and support, please see:
  2. [Azure Machine Learning Services](https://azure.microsoft.com/en-us/services/machine-learning/)
  3. [Power BI](https://docs.microsoft.com/en-us/power-bi/)
 
-## Getting Started and Process Overview  
-1. Clone this repository and navigate to the root of the directory  
-2. Go to [Deployment guide](./Resource_Deployment/README.md) for the steps you need to take to deploy this solution  
+## Process Overview  
 
 The architecture diagram below details what you will be building for this Solution Accelerator:
 
