@@ -15,7 +15,7 @@ This accelerator was built to provide developers with all of the resources neede
 ## Getting Started 
 Start by deploying the [resources](./Resource_Deployment/ResourceDeployment.md) needed for this solution: 
 
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmicrosoft%2FAzure-Synapse-Solution-Accelerator-Financial-Analytics-Customer-Revenue-Growth-Factor%2FResource_Deployment%2Fazuredeploy.json)
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmicrosoft%2FAzure-Synapse-Solution-Accelerator-Financial-Analytics-Customer-Revenue-Growth-Factor%2Fmain%2FResource_Deployment%2Fazuredeploy.json)
 
 1. Clone this repository and navigate to the root of the directory  
 2. Go to [Deployment guide](./Resource_Deployment/README.md) for the steps you need to take to deploy this solution 
