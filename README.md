@@ -1,3 +1,14 @@
+---
+page_type: sample
+languages:
+- python
+products:
+- azure-synapse-analytics
+- azure-machine-learning
+- power-bi
+---
+
+# Customer Revenue Growth Factor Soltion Accelerator
 ![Customer Revenue Growth Factor Solution Accelerator](./Resource_Deployment/imgs/CustomerRevenueGrowthFactor.png)
 
 ## About this repository
