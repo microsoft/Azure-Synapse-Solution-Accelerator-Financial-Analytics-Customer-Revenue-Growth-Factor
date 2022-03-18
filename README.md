@@ -8,10 +8,9 @@ products:
 - power-bi
 ---
 
-# Customer Revenue Growth Factor Soltion Accelerator
 ![Customer Revenue Growth Factor Solution Accelerator](./Resource_Deployment/imgs/CustomerRevenueGrowthFactor.png)
 
-## About this repository
+# Customer Revenue Growth Factor Soltion Accelerator
 This accelerator was built to provide developers with all of the resources needed to build a solution to identify the top factors for revenue growth from an e-commerce platform using Azure Synapse Analytics and Azure Machine Learning.
 
 
