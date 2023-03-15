@@ -4,14 +4,13 @@ We are currently working on an automated deployment process for this solution ac
 
 ## Step 1: Get the data required for this Accelerator 
 We are using the data provided by [this Kaggle Open Dataset](https://www.kaggle.com/mkechinov/ecommerce-behavior-data-from-multi-category-store), we suggest to download to an Azure VM, otherwise you will need to download the data locally. You will need the following CSV/datasets (download them):  
-        - 2019-Oct.csv  
+         - 2019-Oct.csv  
         - 2019-Nov.csv  
-    - These files will be downloaded from a Google drive
-    - 2019-Dec.csv.gz (available [here](https://drive.google.com/drive/folders/1Nan8X33H8xrXS5XhCKZmSpClFTCJsSpE))   
-    - 2020-Jan.csv.gz (available [here](https://drive.google.com/drive/folders/1Nan8X33H8xrXS5XhCKZmSpClFTCJsSpE))
-    - 2020-Feb.csv.gz (available [here](https://drive.google.com/drive/folders/1Nan8X33H8xrXS5XhCKZmSpClFTCJsSpE))  
-    - 2020-Mar.csv.gz (available [here](https://drive.google.com/drive/folders/1Nan8X33H8xrXS5XhCKZmSpClFTCJsSpE))
-    - 2020-Apr.csv.gz (available [here](https://drive.google.com/drive/folders/1Nan8X33H8xrXS5XhCKZmSpClFTCJsSpE))  
+        - 2019-Dec.csv  
+        - 2020-Jan.csv  
+        - 2020-Feb.csv  
+        - 2020-Mar.csv  
+        - 2020-Apr.csv 
 - **Note**: this step may take some time depending on your network connectivity. Consider using an Azure VM to the download and upload of the datasets. Please make sure the VM has at least 30 GB of available storage. 
 
 ## Step 2: Storage Account Permissions
